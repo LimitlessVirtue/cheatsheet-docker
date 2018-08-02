@@ -1,7 +1,5 @@
-![](images/docker-logo.jpg)
-
-# A Docker Cheat Sheet
-
+#![A Docker Cheat Sheet](images/docker-logo.jpg) A Docker Cheat Sheet
+---
 * introducing:
     * What is Docker?
     * What is a container platform?
@@ -196,7 +194,10 @@ While the deployment was on cloud-based platforms such as Google Cloud and Amazo
 * https://github.com/tchapi/markdown-cheatsheet
 * https://github.com/dennyzhang/cheatsheet-docker-A4
 * https://github.com/daten-und-bass/docker-cheat-sheet 
-* https://github.com/daten-und-bass/docker-cheat-sheet
+* https://github.com/dimonomid/docker-quick-ref
+* http://dockerlux.github.io/pdf/cheat-sheet-v2.pdf
+
+
 
 ## Further information:
 Reference documentation: https://docs.docker.com/reference/
