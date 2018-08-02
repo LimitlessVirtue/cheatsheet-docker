@@ -1,4 +1,4 @@
-#![A Docker Cheat Sheet](images/docker-logo.jpg) A Docker Cheat Sheet
+![](images/docker-logo.jpg) A Docker Cheat Sheet
 ---
 * introducing:
     * What is Docker?
@@ -20,6 +20,55 @@
 
 ### Want to improve this cheat sheet?
 > See the  [Contributing](#contributing) section!
+
+#### Docker Compose
+
+ Name                             | Summary                                                                              |
+|----------------------------------|--------------------------------------------------------------------------------------|
+| Change entrypoint to run nothing | `entrypoint: ["tail", "-f", "/dev/null"]`                                            |
+| Change restart policy            | `restart: always` [[https://docs.docker.com/compose/compose-file/compose-file-v2/=restart][link]]                                                               |
+| Mount file as volume             | `$PWD/httpd/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro` [[samples/mount_file.yml][samples/mount_file.yml]] |
+| Start compose env                | `docker-compose up`, `docker-compose up -d`                                          |
+| Stop compose env                 | `docker-compose down`, `docker-compose down -v`                                      |
+| Check logs                       | `docker-compose logs`                                                                |
+
+#### Check Containers
+
+| Name                               | Summary                                                       |
+|------------------------------------|---------------------------------------------------------------|
+| Tail container logs                | `docker logs --tail 5 $container_name`                        |
+| Check container healthcheck status | `docker inspect --format '{{.State.Health}}' $container_name` |
+
+#### Container Basic
+
+| Name                                    | Summary                                             |
+|-----------------------------------------|-----------------------------------------------------|
+| Create docker image                     | `docker build -t imgname .`                         |
+| Start docker container                  | `docker run -p 4000:80 imgname`                     |
+| Start docker container in detached mode | `docker run -d -p 4000:80 imgname`                  |
+| Enter a running container               | `docker exec -it [container-id] sh`                 |
+| List containers                         | `docker ps`                                         |
+| List all containers                     | `docker ps -a`                                      |
+| List containers by labels               | `docker ps --filter "label=org.label-schema.group"` |
+| Stop container                          | `docker stop <hash>`                                |
+| Remove container                        | `docker rm <hash>`                                  |
+| Remove all containers                   | `docker rm $(docker ps -a -q)`                      |
+| Force shutdown of one given container   | `docker kill <hash>`                                |
+| List all images                         | `docker images -a`                                  |
+| Login to docker hub                     | `docker login`                                      |
+| Tag <image>                             | `docker tag <image> username/repo:tag`              |
+| Docker push a tagged image to repo      | `docker push username/repo:tag`                     |
+| Run image from a given tag              | `docker run username/repo:tag`                      |
+
+#### Cleanup
+| Name                           | Summary                                                  |
+|--------------------------------|----------------------------------------------------------|
+| Remove the specified image     | `docker rmi <imagename>`                                 |
+| Remove all docker images       | `docker rmi $(docker images -q)`                         |
+| Remove orphaned docker volumes | `docker volume rm $(docker volume ls -qf dangling=true)` |
+| Remove dead containers         | `docker rm $(docker ps --filter status=dead -qa)`        |
+
+
 
 ## Purging All Unused [Images, Containers, Volumes, and Networks]:
 
@@ -188,6 +237,8 @@ While the deployment was on cloud-based platforms such as Google Cloud and Amazo
 
 
 ## <a name="references">References</a>
+
+Incomplete list:
 * [digitalocean](https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes)
 * https://github.com/juliogomez/docker_cheatsheet
 * https://github.com/wsargent/docker-cheat-sheet/blob/master/README.md
@@ -203,6 +254,6 @@ While the deployment was on cloud-based platforms such as Google Cloud and Amazo
 Reference documentation: https://docs.docker.com/reference/
 
 ## <a name="license">License</a>
-
+License: Code is licensed under [License]
 
 @ShmuelMaruani, @LimitlessVirtue, @limitlessv
