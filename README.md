@@ -1,6 +1,6 @@
 ![](images/docker-logo.jpg) A Docker Cheat Sheet
 ---
-* introducing:
+* Intrudaction:
     * What is Docker?
     * What is a container platform?
     * Want to improve this cheat sheet?
@@ -23,27 +23,27 @@
 
 #### Docker Compose
 
- Name                             | Summary                                                                              |
+| Task                             | Command Line                                                                              |
 |----------------------------------|--------------------------------------------------------------------------------------|
 | Change entrypoint to run nothing | `entrypoint: ["tail", "-f", "/dev/null"]`                                            |
-| Change restart policy            | `restart: always` [[https://docs.docker.com/compose/compose-file/compose-file-v2/=restart][link]]                                                               |
-| Mount file as volume             | `$PWD/httpd/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro` [[samples/mount_file.yml][samples/mount_file.yml]] |
+| Change restart policy            | `restart: always` [https://docs.docker.com/compose/compose-file/compose-file-v2/=restart][link]                                                               |
+| Mount file as volume             | `$PWD/httpd/httpd.conf:/usr/local/apache2/conf/httpd.conf:ro` [samples/mount_file.yml][samples/mount_file.yml] |
 | Start compose env                | `docker-compose up`, `docker-compose up -d`                                          |
 | Stop compose env                 | `docker-compose down`, `docker-compose down -v`                                      |
 | Check logs                       | `docker-compose logs`                                                                |
 
 #### Check Containers
 
-| Name                               | Summary                                                       |
+| Task                               | Command Line                                                       |
 |------------------------------------|---------------------------------------------------------------|
 | Tail container logs                | `docker logs --tail 5 $container_name`                        |
 | Check container healthcheck status | `docker inspect --format '{{.State.Health}}' $container_name` |
 
 #### Container Basic
 
-| Name                                    | Summary                                             |
+| Task                                    | Command Line                                             |
 |-----------------------------------------|-----------------------------------------------------|
-| Create docker image                     | `docker build -t imgname .`                         |
+| Create docker image                     | `javascript docker build -t imgname .`                         |
 | Start docker container                  | `docker run -p 4000:80 imgname`                     |
 | Start docker container in detached mode | `docker run -d -p 4000:80 imgname`                  |
 | Enter a running container               | `docker exec -it [container-id] sh`                 |
@@ -61,7 +61,8 @@
 | Run image from a given tag              | `docker run username/repo:tag`                      |
 
 #### Cleanup
-| Name                           | Summary                                                  |
+
+| Task                           | Command Line                                             |
 |--------------------------------|----------------------------------------------------------|
 | Remove the specified image     | `docker rmi <imagename>`                                 |
 | Remove all docker images       | `docker rmi $(docker images -q)`                         |
@@ -69,35 +70,28 @@
 | Remove dead containers         | `docker rm $(docker ps --filter status=dead -qa)`        |
 
 
-
-## Purging All Unused [Images, Containers, Volumes, and Networks]:
+#### Purging All Unused [Images, Containers, Volumes, and Networks]:
 
 Docker provides a single command that will clean up any resources — images, containers, volumes, and networks — that are dangling (not associated with a container):
 
-```
-docker system prune
-```
+| Task                           | Command Line                                             |
+|--------------------------------|----------------------------------------------------------|
+| Clean up any resources — images, containers, volumes, and networks — that are dangling | `docker system prune` |
+| Remove any stopped containers and all unused images (not just dangling images) | `docker system prune -a` |
+| Remove one or more specific images | |
 
-To additionally remove any stopped containers and all unused images (not just dangling images), add the -a flag to the command:
-
-```
-docker system prune -a
-```
 
 ## Removing Docker Images:
 
-### Remove one or more specific images:
-
+$### Remove one or more specific images:
 Use the `docker images` command with the `-a` flag to locate the ID of the images you want to remove. This will show you every image, including intermediate image layers. When you've located the images you want to delete, you can pass their ID or tag to `docker rmi`:
 
-List:
-```
-docker images -a
-```
-Remove:
-```
-docker rmi IMAGE [IMAGE...]
-```
+| Task                           | Command Line                                             |
+|--------------------------------|----------------------------------------------------------|
+| List                           | `docker images -a`                                       |
+| Remove                         | `docker rmi IMAGE [IMAGE...]`                            |
+
+``
 
 ### Remove dangling images:
 Docker images consist of multiple layers. Dangling images are layers that have no relationship to any tagged images. They no longer serve a purpose and consume disk space. They can be located by adding the filter flag, `-f` with a value of `dangling=true` to the `docker images` command. When you're sure you want to delete them, you can use the `docker images purge` command:
